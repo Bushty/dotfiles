@@ -1,0 +1,36 @@
+{
+	"label": "lock",
+	"text": "Lock",
+	"keybind": "l",
+	"action": "echo ':: Lock'; sleep 0.2; hyprlock;"
+}	
+{
+	"label": "hibernate",
+	"text": "Hibernate",
+	"keybind": "h",
+	"action": "echo ':: Hibernate'; sleep 0.2; systemctl hibernate"
+}
+{
+	"label": "logout",
+	"text": "Exit",
+	"keybind": "e",
+	"action": "echo ':: Exit'; sleep 0.2; killall -9 Hyprland; sleep 2;"
+}
+{
+	"label": "shutdown",
+	"text": "Shutdown",
+	"keybind": "s",
+	"action": "echo ':: Shutdown'; sleep 0.2; systemctl poweroff"
+}
+{
+	"label": "suspend",
+	"text": "Suspend",
+	"keybind": "u",
+	"action": "echo ':: Suspend'; sleep 0.2; systemctl suspend"
+}
+{
+	"label": "reboot",
+	"text": "Reboot",
+	"keybind": "r",
+	"action": "echo ':: Reboot'; sleep 0.2; systemctl reboot"
+}

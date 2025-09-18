@@ -1,0 +1,12 @@
+// ~/.config/waybar/multiple_screens/monitor-general.json
+// -*- mode: json -*-
+{
+	"layer": "bottom",
+	"position": "bottom",
+	"height": 38,			// default: 38
+	"margin-top": 0,
+	"margin-bottom": 0,
+	"margin-left": 0,
+	"margin-right": 0,
+	"spacing": 8,			// spacing between modules
+}

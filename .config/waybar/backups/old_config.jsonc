@@ -1,0 +1,103 @@
+// ~/.config/waybar/config
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 32, // You can adjust this
+    "spacing": 8, // Spacing between modules
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "battery", "tray"],
+
+"hyprland/workspaces": {
+        "format": "{icon}", 
+        "format-icons": {
+            "1": "󰎦", // Example: nf-md-numeric_1_box_outline (or use numbers "₁", "₂" or other icons)
+            "2": "󰎩", 
+            "3": "󰎬",
+            "4": "󰎮",
+            "5": "󰎰",
+            "6": "󰎳", // For second monitor or just more workspaces
+            "7": "󰎶",
+            "8": "󰎹",
+            "9": "󰎼",
+            "10": "󰽃",
+            "default": "󰧞",    // Fallback icon (e.g., nf-mdi-circle_medium)
+            "focused": "󰮯",    // Focused icon (e.g., nf-fa-circle)
+            // "persistent": "persistent_ws", // CHANGE THIS! Use an icon for persistent workspaces
+            "persistent": "circle_thin_outline", // Example: nf-mdi-circle_outline or a very subtle dot. Or just "" if you want nothing for empty persistent ones.
+                                    // A common choice for persistent but inactive: "" (nf-fa-circle) or "" (nf-fa-circle_o) but smaller/dimmed via CSS
+                                    // Or, let's use a specific Kanagawa-themed dot, if available, or a generic one.
+                                    // For Kanagawa, maybe a small, filled, dark circle: "●" (can be styled) or a Nerd Font equivalent.
+                                    // Let's try a subtle Nerd Font icon: "tiny_dot" (nf-mdi-circle-small) or "circle_outline" (nf-mdi-checkbox_blank_circle_outline)
+            "urgent": "urgent_ws"      // Urgent icon (e.g., nf-mdi-alert_circle)
+        },
+        "persistent-workspaces": {
+            "1": [], "2": [], "3": [], "4": [], "5": [],
+            "6": [], "7": [], "8": [], "9": [], "10": [] // Adjust as needed
+        },
+        "all-outputs": true,
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+
+    "clock": {
+        "format": "󰥔 {:%I:%M %p}", // Example: nf-mdi-clock_time_four_outline 05:38 PM
+        "format-alt": "󰸗 {:%A, %b %d}", // Example: nf-mdi-calendar_month_outline Monday, May 15
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>", // Calendar tooltip
+        "on-click": "mode" // Switch between format and format-alt
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰖁 Muted", // nf-mdi-volume_mute
+        "format-icons": {
+            "headphone": "󰋋", // nf-mdi-headphones
+            "hands-free": "󰋎", // nf-mdi-headset_dock for example
+            "headset": "󰋎",    // nf-mdi-headset
+            "phone": "󰏲",      // nf-mdi-phone
+            "portable": "󰏲",   // nf-mdi-cellphone
+            "car": "󰄋",        // nf-mdi-car
+            "default": ["", "", ""] // nf-fa-volume_off, nf-fa-volume_down, nf-fa-volume_up
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol", // Opens pavucontrol or your preferred audio manager
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+
+    "network": {
+        // "interface": "wlan0", // try to comment this out for auto-detection
+        "format-wifi": "󰖩 {essid} ({signalStrength}%)", // nf-mdi-wifi
+        "format-ethernet": " Ethernet", // nf-mdi-ethernet
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "󰖪 Disconnected", // nf-mdi-wifi_off
+        "tooltip-format": "{ifname} via {gwaddr}  {ipaddr}/{cidr}",
+        "on-click": "" // Add a command if you want, e.g., your network manager TUI/GUI
+    },
+
+    "battery": {
+        "states": {
+            "good": 90, // Battery full more or less
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "Charging {capacity}%", // nf-mdi-battery_charging
+        "format-plugged": " plugged_in {capacity}%",  // nf-mdi-battery_plus
+        "format-alt": "{time} {icon}", // Shows time to empty/full on hover
+        "format-icons": ["LOW", "LOW", "Medium", "Full", "Full"] // nf-mdi-battery_alert, _10, _20, ..., _90, _alert_variant_outline etc.
+        // Better icons for battery:
+        // "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        // (0%, 10%, 20%, ..., 90%, 100%, charging) - you'll need to map these to "bat0" etc. if Waybar expects named icons
+        // For simplicity with "states", the array above is okay, but you can get more granular.
+        // A common way is to use an array corresponding to levels:
+        // "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        // Waybar picks based on percentage if format-icons is an array of strings.
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10 // Spacing between tray icons
+    }
+}

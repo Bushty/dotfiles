@@ -1,0 +1,40 @@
+// ~/.config/waybar/config.jsonc
+// -*- mode: jsonc -*-
+{
+    // General Settings
+    "layer": "bottom",
+    "position": "bottom",
+    "height": 38,                      // Adjusted for comfortable module height
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 8,                      // Spacing between module groups
+
+    // Load Module Details
+    "include": [
+        "~/.config/waybar/single_screen/modules.json"
+    ],
+
+    // Modules Left: Your custom items + Workspaces
+    "modules-left": [
+        "custom/exit",                // Your existing custom module
+        "custom/appmenu",             // Your existing custom module
+        "hyprland/workspaces"
+    ],
+
+    // Modules Center: Clock
+    "modules-center": [
+        "clock"
+    ],
+
+    // Modules Right: System status items
+    "modules-right": [
+        "group/hardware",             // Your existing group
+        "pulseaudio",
+        "bluetooth",
+        "network",
+        "battery",
+        "tray"
+    ]
+}

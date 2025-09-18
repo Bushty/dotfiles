@@ -1,0 +1,45 @@
+// ~/.config/waybar/multiple_screens/config.jsonc
+// -*- mode: jsonc -*-
+{
+	"output": "eDP-1",
+
+	// General Settings
+	//"include": [
+	//	"~/.config/waybar/multiple_screens/monitor-general.json"
+	//]
+
+	// Load Module Details
+	"include": [
+		"~/.config/waybar/multiple_screens/modules.json"
+	],
+
+	// Modules Left:
+	"modules-left": [
+		"custom/exit",
+		"custom/appmenu",
+		"hyprland/workspaces"
+	],
+
+	// Modules Center: Clock
+	"modules-center": [
+		"clock"
+	],
+
+	// Modules Right: System status items
+	"modules-right": [
+		"group/hardware",
+		"pulseaudio",
+		"bluetooth",
+		"network",
+		"battery",
+		"tray"
+	]
+},
+{
+	"output": "DP-5",
+	
+	// General Settings
+	"include": [
+		"~/.config/waybar/multiple_screens/monitor-general.json"
+	]
+}

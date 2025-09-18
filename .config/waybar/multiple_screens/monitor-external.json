@@ -1,0 +1,10 @@
+// ~/.config/waybar/multiple_screens/monitor-external.json
+// -*- mode: json -*-
+{
+	// Internal Monitor Settings
+	//"output": "eDP-1"
+	
+	"include": [
+		"~/.config/waybar/multiple_screens/monitor-general.json"
+	]
+}

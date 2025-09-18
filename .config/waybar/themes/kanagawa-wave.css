@@ -1,0 +1,25 @@
+/* ~/.config/waybar/themes/kanagawa-wave.css */
+
+/* =============================================================================
+ * ---- KANAGAWA WAVE THEME Colors ----
+ * ============================================================================= */
+@define-color theme_bg_color #1f1f28;      /* sumiInk1 - Main background */
+@define-color theme_fg_color #dcd7ba;      /* fujiWhite - Main text */
+@define-color theme_bg_alt_color #2a2a37; /* sumiInk2 - Slightly lighter bg for elements */
+@define-color theme_border_color #4a4a5a; /* A subtle border color */
+
+@define-color theme_accent1_color #7aa89f; /* waveAqua2 / mountainBlue - General accent, focused */
+@define-color theme_accent2_color #c0a060; /* carpYellow - Warning, attention */
+@define-color theme_accent3_color #e26d69; /* peachRed - Urgent, critical */
+@define-color theme_accent4_color #957fb8; /* oniViolet - Alternative accent */
+
+/* Semantic colors */
+@define-color urgent_bg_color @theme_accent3_color;
+@define-color urgent_fg_color #16161d; /* Dark text on urgent background */
+@define-color warning_bg_color @theme_accent2_color;
+@define-color warning_fg_color #16161d; /* Dark text on warning background */
+@define-color focused_bg_color @theme_accent1_color;
+@define-color focused_fg_color #16161d; /* Dark text on focused background */
+
+@define-color inactive_fg_color alpha(@theme_fg_color, 0.5); /* Muted for inactive elements */
+@define-color inactive_bg_color transparent; /* Or a very dark variant of theme_bg_color */

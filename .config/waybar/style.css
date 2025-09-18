@@ -1,0 +1,170 @@
+/* ~/.config/waybar/style.css */
+
+
+/* Theme Import */
+/* uncomment the line to load the color variables for the specific theme */
+/* @import url("themes/kanagawa-wave.css"); */
+@import url("themes/tokyo-night.css");
+
+/* Example for other themes: */
+/* @import url("themes/nord.css"); */
+
+/* =============================================================================
+ * ---- BASE BAR STYLING ----
+ * ============================================================================= */
+window#waybar {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+    font-family: 'JetBrainsMono Nerd Font', 'JetBrains Mono NF', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'Font Awesome 6 Solid', 'Noto Sans', 'sans-serif';
+    font-size: 14px; /* Adjust to your preference */
+    border-top: 1px solid @theme_border_color; /* For bottom bar, a top border */
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+tooltip {
+    background: @theme_bg_alt_color;
+    border: 1px solid @theme_border_color;
+    border-radius: 8px;
+    padding: 10px;
+    color: @theme_fg_color;
+}
+
+tooltip label {
+    color: @theme_fg_color;
+}
+
+/* =============================================================================
+ * ---- GENERAL MODULE STYLING ----
+ * ============================================================================= */
+#workspaces button,
+#clock,
+#pulseaudio,
+#network,
+#battery,
+#tray,
+#custom-module { /* For any future custom modules */
+    padding: 2px 10px;      /* Vertical Horizontal padding */
+    margin: 4px 3px;        /* Vertical Horizontal margin around modules */
+    border-radius: 8px;     /* Modern rounded corners */
+    background-color: transparent; 
+    color: @theme_fg_color;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid transparent; /* Prepare for borders on hover/active */
+}
+
+/* Add a subtle hover effect to all modules */
+#workspaces button:hover,
+#clock:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover {
+    background-color: alpha(@theme_fg_color, 0.1);
+    /* border: 1px solid @theme_border_color; */ /* Optional: border on hover */
+}
+
+/* =============================================================================
+ * ---- MODULE SPECIFIC STYLING ----
+ * ============================================================================= */
+
+/* ---- Workspaces ---- */
+#workspaces button {
+    padding: 2px 8px; 
+    margin: 4px 2px;
+    color: @inactive_fg_color;
+    background-color: @inactive_bg_color;
+    font-size: 16px; /* Make icons slightly larger if using icon-only format */
+}
+
+#workspaces button.persistent {
+    color: alpha(@theme_fg_color, 0.4); /* Even more muted for empty persistent */
+}
+
+#workspaces button.focused {
+    background-color: @focused_bg_color;
+    color: @focused_fg_color;
+    border-radius: 8px; /* Ensure consistent rounding */
+    border: 1px solid @focused_bg_color;
+}
+
+#workspaces button.urgent {
+    background-color: @urgent_bg_color;
+    color: @urgent_fg_color;
+    border-radius: 8px;
+    border: 1px solid @urgent_bg_color;
+}
+
+/* ---- Clock ---- */
+#clock {
+    color: @theme_fg_color;
+    background-color: @theme_bg_alt_color; /* Make clock stand out a bit */
+    padding: 2px 15px; /* More padding for the central element */
+    font-weight: bold;
+}
+
+/* ---- Pulseaudio ---- */
+#pulseaudio {
+    color: @theme_fg_color;
+    /* If icon is on the left, text on right */
+}
+#pulseaudio.muted {
+    color: @inactive_fg_color;
+    background-color: @warning_bg_color; /* Use warning for muted state */
+    color: @warning_fg_color;
+}
+
+/* ---- Network ---- */
+#network {
+    color: @theme_fg_color;
+}
+#network.disconnected, 
+#network.disabled {
+    color: @inactive_fg_color;
+    background-color: @warning_bg_color;
+    color: @warning_fg_color;
+}
+#network.linked, 
+#network.ethernet, 
+#network.wifi {
+    color: @theme_accent1_color; /* Use an accent for connected state */
+}
+
+/* ---- Battery ---- */
+#battery {
+    color: @theme_fg_color;
+}
+#battery.charging, 
+#battery.plugged {
+    color: @theme_accent2_color; /* Yellowish accent for charging/plugged */
+}
+#battery.warning:not(.charging):not(.plugged) {
+    background-color: @warning_bg_color;
+    color: @warning_fg_color;
+}
+#battery.critical:not(.charging):not(.plugged) {
+    background-color: @urgent_bg_color;
+    color: @urgent_fg_color;
+    animation: blink 1s infinite alternate; /* Blinking animation for critical */
+}
+
+@keyframes blink {
+  to {
+    opacity: 0.5;
+  }
+}
+
+
+/* ---- Tray ---- */
+#tray {
+    background-color: transparent; 
+    padding: 2px 6px;
+    margin-right: 6px; 
+}
+#tray > .passive { 
+    opacity: 0.7;
+}
+#tray > .needs-attention {
+    background-color: @warning_bg_color;
+    color: @warning_fg_color;
+    border-radius: 6px;
+}

@@ -1,0 +1,63 @@
+/* ~/.config/waybar/themes/tokyo-night.css */
+
+/* =============================================================================
+ * ---- TOKYO NIGHT Theme Colors ----
+ * (Based on the "Tokyo Night Storm" palette)
+ * ============================================================================= */
+
+/* Core Palette */
+@define-color night_bg_main      #1a1b26; /* Main background - dark_purple_blue */
+@define-color night_bg_dark      #16161e; /* Darker background - for subtle borders or elements */
+@define-color night_bg_highlight #292e42; /* Lighter background - for selections, alt_bg */
+@define-color night_bg_visual    #24283b; /* Visual background, slightly different from main */
+@define-color night_fg_main      #c0caf5; /* Main foreground - light_lavender_blue */
+@define-color night_fg_alt       #a9b1d6; /* Alternative/dimmed foreground */
+@define-color night_fg_gutter    #3b4261; /* Gutter foreground, can be used for less prominent borders */
+@define-color night_comment_grey #565f89; /* Comments - greyish_blue */
+
+/* Accents */
+@define-color night_blue         #7aa2f7; /* Bright blue - primary accent */
+@define-color night_cyan         #7dcfff; /* Cyan / Light Blue */
+@define-color night_green        #9ece6a; /* Bright green */
+@define-color night_green_alt    #73daca; /* Alternative green / Tealish */
+@define-color night_orange       #ff9e64; /* Orange */
+@define-color night_purple       #bb9af7; /* Purple / Magenta */
+@define-color night_red          #f7768e; /* Red */
+@define-color night_yellow       #e0af68; /* Yellow */
+@define-color night_pink         #ff79c6; /* Pink (often seen in some variants) */
+
+
+/* =============================================================================
+ * ---- WAYBAR THEME VARIABLE MAPPING ----
+ * ============================================================================= */
+@define-color theme_bg_color     @night_bg_main;
+@define-color theme_fg_color     @night_fg_main;
+@define-color theme_bg_alt_color @night_bg_highlight;
+@define-color theme_border_color @night_bg_dark;    /* Subtle border against main bg */
+/* For a more visible border, you could use @night_fg_gutter */
+
+/* Accents for Waybar elements */
+@define-color theme_accent1_color @night_blue;      /* Primary accent (e.g., focused elements) */
+@define-color theme_accent2_color @night_orange;     /* Warning / Attention */
+@define-color theme_accent3_color @night_red;        /* Urgent / Critical */
+@define-color theme_accent4_color @night_purple;     /* Alternative accent */
+
+/* Additional accents if your Waybar style uses more */
+@define-color theme_green_color   @night_green;
+@define-color theme_yellow_color  @night_yellow;
+@define-color theme_cyan_color    @night_cyan;
+@define-color theme_pink_color    @night_pink;
+
+
+/* Semantic color definitions for Waybar states */
+@define-color urgent_bg_color    @theme_accent3_color;  /* Red background */
+@define-color urgent_fg_color    @night_bg_main;        /* Dark text on red background for contrast */
+
+@define-color warning_bg_color   @theme_accent2_color;  /* Orange background */
+@define-color warning_fg_color   @night_bg_main;        /* Dark text on orange background */
+
+@define-color focused_bg_color   @theme_accent1_color;  /* Blue background */
+@define-color focused_fg_color   @night_bg_main;        /* Dark text on blue background */
+
+@define-color inactive_fg_color  alpha(@theme_fg_color, 0.55); /* Muted foreground for inactive elements */
+@define-color inactive_bg_color  transparent;                 /* Or @night_bg_dark for a subtle background */

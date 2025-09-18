@@ -1,0 +1,10 @@
+// ~/.config/waybar/config.jsonc
+// -*- mode: jsonc -*-
+{
+
+    // Select config to laod
+    "include": [
+        //"~/.config/waybar/multiple_screens/config.jsonc"
+        "~/.config/waybar/single_screen/config.jsonc"
+    ],
+}

@@ -1,0 +1,100 @@
+// ~/.config/waybar/config.jsonc
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "height": 36, // Adjusted for comfortable module height
+    "spacing": 8, // Spacing between modules
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "battery", "tray"],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            // You can find more icons at https://www.nerdfonts.com/cheat-sheet
+            "1": "󰎦",  // nf-md-numeric_1_box_outline
+            "2": "󰎩",  // nf-md-numeric_2_box_outline
+            "3": "󰎬",  // nf-md-numeric_3_box_outline
+            "4": "󰎮",  // nf-md-numeric_4_box_outline
+            "5": "󰎰",  // nf-md-numeric_5_box_outline
+            "6": "󰎳",  // nf-md-numeric_6_box_outline
+            "7": "󰎶",  // nf-md-numeric_7_box_outline
+            "8": "󰎹",  // nf-md-numeric_8_box_outline
+            "9": "󰎼",  // nf-md-numeric_9_box_outline
+            "10": "󰽃", // nf-md-numeric_10_box_outline
+            "default": "",    // nf-fa-circle (a simple dot for other workspaces)
+            "focused": "󰮯",    // nf-fa-circle (filled, can be styled differently in CSS)
+            "persistent": "", // nf-fa-circle_o (empty circle for inactive persistent)
+            "urgent": ""       // nf-fa-warning
+        },
+        "persistent-workspaces": {
+            // Adjust to your monitor setup and desired persistent workspaces
+            "1": [], "2": [], "3": [], "4": [], "5": [],
+            "6": [], "7": [], "8": [], "9": [], "10": []
+        },
+        "all-outputs": true,
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+
+    "clock": {
+        "format": "󰥔 {:%I:%M %p}",       // nf-mdi-clock_time_four_outline
+        "format-alt": " {:%A, %b %d}", // nf-fa-calendar
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "mode"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰖁 Muted", // nf-mdi-volume_mute
+        "format-icons": {
+            "headphone": "󰋋",     // nf-mdi-headphones
+            "hands-free": "󰋎",    // nf-mdi-headset_dock (or similar)
+            "headset": "󰋎",       // nf-mdi-headset
+            "phone": "󰏲",         // nf-mdi-phone
+            "portable": "󰏲",      // nf-mdi-cellphone
+            "car": "󰄋",           // nf-mdi-car
+            "default": ["", "", ""] // nf-fa-volume_off, nf-fa-volume_down, nf-fa-volume_up
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol", // Or your preferred audio manager
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+
+    "network": {
+        "format-wifi": "󰖩 {essid} ({signalStrength}%)", // nf-mdi-wifi
+        "format-ethernet": "󰈀 Ethernet",                 // nf-mdi-ethernet
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "󰖪 Disconnected",           // nf-mdi-wifi_off
+        "tooltip-format": "{ifname} via {gwaddr}  {ipaddr}/{cidr}", // nf-fa-globe
+        "on-click": "" // Add network manager command if desired
+    },
+
+    "battery": {
+        "bat": "BAT2", // Adjusted based on your logs (was BAT0 or BAT1)
+        "states": {
+            "good": 90,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",      // nf-mdi-battery_charging (general charging icon)
+        "format-plugged": "󰚥 {capacity}%",       // nf-mdi-power_plug
+        "format-alt": "{time} {icon}",
+        // Icons for different battery levels: 0-19%, 20-39%, 40-59%, 60-79%, 80-100%
+        "format-icons": ["󰁎", "󰁺", "󰁼", "󰁾", "󰁹"],
+        // Example icons from Material Design Icons (Nerd Font):
+        // "󰁎" = battery-alert-variant-outline (critical/empty)
+        // "󰁺" = battery-20 (low)
+        // "󰁼" = battery-50 (medium)
+        // "󰁾" = battery-80 (high)
+        // "󰁹" = battery (full)
+    },
+
+    "tray": {
+        "icon-size": 18, // Adjust as needed
+        "spacing": 10    // Spacing between tray icons
+    }
+}

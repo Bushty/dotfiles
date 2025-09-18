@@ -1,0 +1,195 @@
+// ~/.config/waybar/modules.json
+// MODULES for waybar
+{
+    // Workspaces
+    "hyprland/workspaces": {
+        "on-scroll-up": "hyprctl dispatch workspace r-1",
+        "on-scroll-down": "hyprctl dispatch workspace r+1",
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "󰎦", "2": "󰎩", "3": "󰎬", "4": "󰎮", "5": "󰎰",
+            "6": "󰎳", "7": "󰎶", "8": "󰎹", "9": "󰎼", "10": "󰽃",
+            "default": "",    // nf-fa-circle (simple dot)
+            "focused": "󰮯",    // nf-fa-circle (filled, for focused)
+            "persistent": "", // nf-fa-circle_o (empty circle for inactive persistent)
+            "urgent": ""       // nf-fa-warning
+        },
+        "persistent-workspaces": { // Shows workspaces 1-5 persistently as an example
+            "1": [], "2": [], "3": [], "4": [], "5": []
+        }
+    },
+
+    // Hyprland Window (Keeping your existing config in case you re-add it to modules-left/center/right)
+    "hyprland/window": {
+        "rewrite": {
+            "(.*) - Brave": "  $1",
+            "(.*) - Chromium": "  $1",
+            "(.*) - Brave Search": "  $1",
+            "(.*) - Discord": "$1",
+            "nvim (.*)": "  $1",
+            "(.*) - (.*) - Obsidian (.*)": "  $1"
+        },
+        // "separate-outputs": true // Note: This property might be "separate-outputs" (typo in original)
+                                 // Or it might be deprecated/handled differently in newer Waybar/Hyprland module.
+                                 // If an issue, try removing or checking Waybar docs.
+    },
+
+    // Your Custom Modules (keeping as is from your file)
+    "custom/empty": { "format": "" },
+    "custom/tools": { "format": "", "tooltip-format": "Tools" },
+    "custom/cliphist": {
+        "format": "", // nf-fa-clipboard
+        "on-click": "", "on-click-right": "", "on-click-middle": "",
+        "tooltip-format": "Clipboard Manager"
+    },
+    "custom/appmenu": {
+        "format": " Apps ", // Consider an icon: "󰍜 Apps" (nf-mdi-apps)
+        "margin-right": 10,
+        "on-click": "wofi --show drun",
+        "tooltip-format": "Left: Open the application launcher"
+    },
+    "custom/hyprshade": {
+        "format": "", // nf-mdi-theme_light_dark
+        "tooltip-format": "Toggle Screen Shader",
+        "on-click": "sleep 0.5; ~/dotfiles/hypr/scripts/hyprshade.sh",
+        "on-click-right": "sleep 0.5; ~/dotfiles/hypr/scripts/hyprshade.sh rofi"
+    },
+    "custom/exit": {
+        "format": "  ", // nf-fa-power_off
+        "on-click": "wlogout",
+        "tooltip-format": "Power Menu"
+    },
+    "custom/system": { // Part of group/hardware
+        "format": " ", // nf-fa-desktop
+        "tooltip": false
+    },
+
+    // Keyboard State (Keeping your existing config)
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": { "locked": "  ", "unlocked": "  " }
+    },
+
+    // System tray
+    "tray": {
+        "icon-size": 18, // Adjusted from 21
+        "spacing": 10
+    },
+
+    // Clock
+    "clock": {
+        "format": "󰥔 {:%I:%M %p}",        // Icon + 12-hour format with AM/PM
+        "format-alt": " {:%A, %b %d}",  // Icon + Day, Month Date
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "mode"
+    },
+
+    // CPU (Part of group/hardware)
+    "cpu": {
+        "format": " {usage}%" // nf-oct-cpu
+    },
+
+    // Memory (Part of group/hardware)
+    "memory": {
+        "format": " {used}G ({percentage_used}%)" // nf-cod-chip (Showing used GB and percentage)
+                                                    // was: "format": "/  {}% "
+    },
+
+    // Disk (Part of group/hardware)
+    "disk": {
+        "interval": 30,
+        "format": "󰋊 {percentage_used}%", // nf-mdi-harddisk
+        "path": "/"
+    },
+
+    // Hyprland Language (Part of group/hardware, keeping your format)
+    "hyprland/language": {
+        "format": "/  {short}" // nf-fa-globe
+    },
+
+    // Group Hardware (Keeping your structure, contents are individually styled above)
+    "group/hardware": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "children-class": "not-memory", // This class might need to be defined/used in your style.css
+            "transition-left-to-right": false
+        },
+        "modules": [ "custom/system", "disk", "cpu", "memory", "hyprland/language" ]
+    },
+
+    // Group Tools (Keeping your structure)
+    "group/tools": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "children-class": "not-memory",
+            "transition-left-to-right": false
+        },
+        "modules": [ "custom/tools", "custom/cliphist" ]
+    },
+
+    // Network
+    "network": {
+        "format-wifi": "󰖩 {essid} ({signalStrength}%)", // nf-mdi-wifi
+        "format-ethernet": "󰈀 Ethernet",                 // nf-mdi-ethernet
+        "format-disconnected": "󰖪",                      // nf-mdi-wifi_off (Icon only)
+        "tooltip-format": "{ifname} via {gwaddr}  {ipaddr}/{cidr}",
+        "tooltip-format-wifi": "󰖩 {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "on-click": "nm-connection-editor",
+        "on-click-right": "kitty -e nmtui"
+    },
+
+    // Battery
+    "battery": {
+        "bat": "BAT0", // Using BAT0 as per your `ls /sys/class/power_supply/` output. Change to BAT1 if preferred.
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",      // nf-mdi-battery_charging
+        "format-plugged": "󰚥 {capacity}%",       // nf-mdi-power_plug
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰁎", "󰁺", "󰁼", "󰁾", "󰁹"]
+        // Icons: critical/empty, low, medium, high, full
+    },
+
+    // Pulseaudio
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰖁 Muted", // nf-mdi-volume_mute
+        "format-icons": {
+            "headphone": "󰋋", "hands-free": "󰋎", "headset": "󰋎",
+            "phone": "󰏲", "portable": "󰏲", "car": "󰄋",
+            "default": ["", "", ""] // nf-fa-volume_off, nf-fa-volume_down, nf-fa-volume_up
+        },
+        "on-click": "pavucontrol",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+
+    // Bluetooth
+    "bluetooth": {
+        "format": "󰂯 {status}", // nf-mdi-bluetooth
+        "format-disabled": "󰂲", // nf-mdi-bluetooth_off (Icon only)
+        "format-off": "󰂲",      // nf-mdi-bluetooth_off (Icon only)
+        "format-connected": "󰂱 {device_alias}", // nf-mdi-bluetooth_connect
+        "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+        "interval": 30,
+        "on-click": "blueman-manager",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_devices} device(s) connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_icon} {device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_icon} {device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "format-no-controller": "󰂲"
+    },
+
+    // User (Keeping your existing config)
+    "user": { "format": "{user}", "interval": 60, "icon": false }
+}

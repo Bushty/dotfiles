@@ -1,0 +1,7 @@
+prompt=Run:
+show=drun
+hide_scroll=true
+allow_images=false
+insensitive=true
+term=alacritty
+allow_markup=false

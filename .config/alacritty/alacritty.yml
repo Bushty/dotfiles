@@ -1,0 +1,4 @@
+shell:
+  program: /usr/bin/bash
+  args:
+    - --login

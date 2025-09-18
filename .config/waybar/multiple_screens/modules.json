@@ -1,0 +1,245 @@
+// MODULES for waybar
+// Work in Progress
+// started on 2024-10-26
+
+
+{
+	// Workspaces
+	"hyprland/workspaces" : {
+		"on-scroll-up": "hyprctl dispatch workspace r-1",
+		"on-scroll-down": "hyprctl dispatch workspace r+1",
+		"on-click": "activate",
+		"active-only": false,
+		"all-outputs": false,
+		"format": "{icon}",
+		"format-icons": {
+			"urgent": "",
+			"active": "󰮯",
+			"default": ""
+		},
+		"persistent-workspaces": {
+			// "*": 5
+			"1": [],
+			"2": [],
+			"3": [],
+			"4": [],
+			"5": []
+		},
+		"special-visible-only": true,
+	},
+
+	// Hyprland Window
+	"hyprland/window": {
+		"rewrite": {
+			"(.*) - Brave": "  $1",
+			"(.*) - Chromium": "  $1",
+			"(.*) - Brave Search": "  $1",
+			"(.*) - Discord": "$1",
+			"nvim (.*)": "  $1",
+			"(.*) - (.*) - Obsidian (.*)": "  $1"
+		},
+		// "seperate-outputs": true
+	},
+
+	// Empty
+	"custom/empty": {
+		"format": ""
+	},
+
+	// Empty
+	"custom/tools": {
+		"format": "",
+		"tooltip-format": "Tools"
+	},
+
+	// Cliphist
+	"custom/cliphist": {
+		"format": "",
+		"on-click": "",
+		"on-click-right": "",
+		"on-click-middle": "",
+		"tooltip-format": "Clipboard Manager"
+	},
+
+	// Rofi Application Launcher
+	"custom/appmenu": {
+		"format": " Apps ",
+		"margin-right": 10,
+		"on-click": "wofi --show drun",
+		"tooltip-format": "Left: Open the application launcher"
+	},
+
+	// Hyprshade
+	"custom/hyprshade": {
+		"format": "",
+        	"tooltip-format": "Toggle Screen Shader",
+        	"on-click": "sleep 0.5; ~/dotfiles/hypr/scripts/hyprshade.sh",
+        	"on-click-right": "sleep 0.5; ~/dotfiles/hypr/scripts/hyprshade.sh rofi"
+    	},
+
+
+
+	// Power Menu
+	"custom/exit": {
+		"format": "  ",
+		"on-click": "wlogout",
+		"tooltip-format": "Power Menu"
+	},
+
+	// Keyboard State
+	"keyboard-state": {
+		"numlock": true, // set to false on laptop w/o numpad
+		"capslock": true,
+		"format": "{name} {icon}",
+		"format-icons": {
+			"locked": "  ",
+			"unlocked": "  "
+		}
+	},
+
+	// System tray
+	"tray": {
+		"icon-size": 21,
+		"spacing": 10
+	},
+
+	// Clock
+	"clock": {
+		"format": "{:%H:%M %a}",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format-alt": "{:%Y-%m-%d}"
+	},
+
+	// System
+	"custom/system": {
+		"format": " ",
+		"tooltip": false
+	},
+
+	// CPU
+	"cpu": {
+		"format": "/  {usage}% "
+	},
+
+	// Memory
+	"memory": {
+		"format": "/  {}% "
+	},
+
+	// HDD space used
+	"disk": {
+		"interval": 30,
+		"format": " {percentage_used}% ",
+		"path": "/"
+	},
+
+	// Hyperland Language
+	"hyprland/language": {
+		"format": "  {short}"
+	},
+
+	// Group Hardware
+	"group/hardware": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 300,
+			"children-class": "not-memory",
+			"transition-left-to-right": false
+		},
+		"modules": [
+			"custom/system",
+			"disk",
+			"cpu",	
+			"memory",
+			"hyprland/language"
+		]
+	},
+
+	// Group Tools
+	"group/tools": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 300,
+			"children-class": "not-memory",
+			"transition-left-to-right": false
+		},
+		"modules": [
+			"custom/tools",
+			"custom/cliphist"
+			//,"custom/hypridle",
+			//"custom/hyprshade"
+		]
+	},
+
+	// Network
+	"network": {
+        	"format": "{ifname}",
+        	"format-wifi": "   {signalStrength}%",
+        	"format-ethernet": "  {ifname}",
+        	"format-disconnected": "Disconnected",
+        	"tooltip-format": " {ifname} via {gwaddri}",
+        	"tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        	"tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+        	"tooltip-format-disconnected": "Disconnected",
+        	"max-length": 50,
+        	"on-click": "nm-connection-editor",
+        	"on-click-right": "kitty -e nmtui"
+    },
+
+
+	// Battery
+	"battery": {
+		"states": {
+			// "good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon}   {capacity}%",
+		"format-charging": "   {capacity}% ",
+	        "format-plugged": "   {capacity}% ",
+		"format-alt": "{icon}   {time} ",
+		"format-icon": ["  ", "  ", "  ", "  "]
+	},
+
+	// Pulseaudio
+	"pulseaudio": {
+		// "scroll-step": 1, // %, can be a float
+       		"format": "{icon}   {volume}%",
+       		"format-bluetooth": "{volume}%  {icon} {format_source}",
+       		"format-bluetooth-muted": " {icon} {format_source}",
+       		"format-muted": " {format_source}",
+       		"format-source": "{volume}% ",
+       		"format-source-muted": "",
+       		"format-icons": {
+            		"headphone": " ",
+            		"hands-free": " ",
+            		"headset": " ",
+            		"phone": " ",
+            		"portable": " ",
+            		"car": " ",
+            		"default": [" ", " ", " "]
+        	},
+        	"on-click": "pavucontrol"
+	},
+		
+
+
+	// Bluetooth
+ 	"bluetooth": {
+        	"format": " {status}",
+        	"format-disabled": "",
+        	"format-off": "",
+        	"interval": 30,
+        	"on-click": "blueman-manager",
+        	"format-no-controller": ""
+    	},
+
+
+
+	// Other
+	"user": {
+		"format": "{user]",
+		"interval": 60,
+		"icon": false
+	}
+}
